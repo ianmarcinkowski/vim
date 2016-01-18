@@ -6,6 +6,8 @@ filetype off
 " set this here because of unicode chars in listchars below
 set encoding=utf-8
 
+" }}}
+
 " plugins using plug.vim {{{
 
 call plug#begin('~/.vim/plugged')
@@ -14,6 +16,8 @@ call plug#begin('~/.vim/plugged')
 
 " Functional plugins
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/fugitive'
+Plug 'gregsexton/gitv'
 
 " HTML autocompletion
 Plug 'mattn/emmet-vim'
@@ -165,6 +169,9 @@ noremap K <NOP>
 
 " Change case for the current word
 :nmap <leader>s :source ~/.vim/vimrc<CR>
+
+" Nerd tree
+map <C-n> :NERDTreeToggle<CR>
 
 " }}}
 
@@ -320,5 +327,8 @@ let g:ctrlp_buftag_types = {
     \ 'wsdl'        : '--language-force=wsdl',
     \ 'markdown'    : '--language-force=markdown'
     \ }
+
+" Nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " }}}
