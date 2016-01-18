@@ -16,8 +16,9 @@ call plug#begin('~/.vim/plugged')
 
 " Functional plugins
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/fugitive'
+Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
+Plug 'itchyny/lightline.vim'
 
 " HTML autocompletion
 Plug 'mattn/emmet-vim'
