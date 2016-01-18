@@ -12,6 +12,9 @@ call plug#begin('~/.vim/plugged')
 
 " From mmazer vimrc (https://github.com/mmazer/vim/blob/master/vimrc)
 
+" Functional plugins
+Plug 'scrooloose/nerdtree'
+
 " HTML autocompletion
 Plug 'mattn/emmet-vim'
 
@@ -32,6 +35,7 @@ Plug 'vim-scripts/paredit.vim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'evidens/vim-twig'
+
 
 call plug#end()
 "}}}
@@ -75,25 +79,8 @@ set ai
 set ruler
 set cc=80,100
 
-" Vim clipboard to OSX clipboard
-set clipboard=unnamed
-
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-match ExtraWhitespace /\s\+$\| \+\ze\t/
-match ExtraWhitespace /[^\t]\zs\t\+/
-
-" highlight PreBracketSpaces ctermbg=green guibg=green
-" match PreBracketSpaces /\w\s(/
-
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
-
-au BufReadPost *inc set filetype=php
-au BufReadPost *module set filetype=php
-au BufReadPost *mako set filetype=html
-au BufReadPost *less set filetype=less
-au BufReadPost *py.* set filetype=python
+" Vim clipboard to X11 clipboard
+set clipboard=unnamedplus
 
 if has('statusline')
         set laststatus=2
@@ -110,6 +97,7 @@ let g:flake8_max_line_length=99
 " Ignore over-indentation error
 let g:flake8_ignore="E126,F403,E712,E711"
 
+" }}}
 
 " 18: mapping {{{1
 
@@ -163,6 +151,7 @@ let g:mapleader = ","
 :nmap <leader>U gUiw
 :nmap <leader>u guiw
 
+" folding
 nnoremap <space> za
 
 " Disable K
@@ -173,6 +162,9 @@ noremap K <NOP>
 
 " Make all buffers equal size
 :nmap <leader>= <C-w>=
+
+" Change case for the current word
+:nmap <leader>s :source ~/.vim/vimrc<CR>
 
 " }}}
 
@@ -186,6 +178,88 @@ set wildignore+=*.class,*.jar,*.war,*.o,*.obj,*.exe,*.dll
 set wildignore+=*.DS_Store
 set wildignore+=*.orig      " merge resolution files
 
+" }}}
+
+" 27: various: autocmd {{{
+
+" autocommands {{{
+if has("autocmd")
+    highlight ExtraWhitespace ctermbg=red guibg=red
+    match ExtraWhitespace /\s\+$/
+    match ExtraWhitespace /\s\+$\| \+\ze\t/
+    match ExtraWhitespace /[^\t]\zs\t\+/
+
+    " highlight PreBracketSpaces ctermbg=green guibg=green
+    " match PreBracketSpaces /\w\s(/
+
+    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+    au InsertLeave * match ExtraWhitespace /\s\+$/
+
+    au BufReadPost *inc set filetype=php
+    au BufReadPost *module set filetype=php
+    au BufReadPost *mako set filetype=html
+    au BufReadPost *less set filetype=less
+    au BufReadPost *py.* set filetype=python
+
+    augroup preview
+        autocmd CompleteDone * pclose
+    augroup END
+
+    " remove trailing whitespace
+    augroup trailing_whitespace
+        autocmd! FileType vim,css,groovy,java,javascript,less,php,scala,taskpaper,python autocmd BufWritePre <buffer> :%s/\s\+$//e
+    augroup END
+
+    " php stuff
+    augroup php
+        autocmd FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+    augroup END
+
+    augroup keyword
+        autocmd FileType html,css,javascript setlocal iskeyword+=-
+    augroup END
+
+    augroup javascript_files
+        autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 foldmethod=indent
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    augroup END
+
+    augroup vim_files
+        autocmd filetype vim set foldmethod=marker
+    augroup END
+
+    augroup html_files
+        autocmd FileType html setlocal shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=manual
+        autocmd FileType html setlocal autoindent
+    augroup END
+
+    augroup jsp_files
+        autocmd FileType jsp setlocal shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=manual autoindent
+    augroup END
+
+    augroup json_files
+        autocmd FileType json command! Format :%!python -m json.tool<CR>
+        autocmd FileType json setlocal foldmethod=syntax
+        autocmd FileType json setlocal foldnestmax=10
+    augroup END
+
+    augroup xml_files
+        autocmd FileType xml setlocal shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=syntax
+    augroup END
+
+    augroup markdown_files
+        autocmd BufNewFile,BufRead *.md,*.mkd,*.markdown setlocal wrap linebreak nolist
+    augroup END
+
+    augroup diff_mode
+        autocmd FilterWritePre * if &diff | nnoremap <buffer> dc :Gdoff<CR> | nnoremap <buffer> du :diffupdate<CR> | endif
+    augroup END
+
+    augroup conf_files
+        autocmd! BufRead *.conf setlocal ft=conf
+        autocmd FileType conf setlocal shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=manual autoindent
+    augroup END
+endif "}}}
 " }}}
 
 " 28: plugin settings {{{1
