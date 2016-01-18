@@ -137,9 +137,8 @@ let g:mapleader = ","
 :map <silent> <leader>n :set invnumber<CR>
 
 " window splitting
-:nmap <leader>s<right> :botright vnew<CR>
-:nmap <leader>sh :leftabove  vnew<CR>
-:nmap <leader>sl :rightbelow vnew<CR>
+:nmap <leader>ss :split<CR>
+:nmap <leader>sv :vsplit<CR>
 
 " swap windows
 :nmap <leader>w <C-w>r<CR>
