@@ -28,6 +28,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'sgur/ctrlp-extensions.vim'
 
+" mutlicursor
+Plug 'terryma/vim-multiple-cursors'
+
 " file types
 Plug 'tpope/vim-markdown'
 Plug 'scrooloose/syntastic'
@@ -171,9 +174,31 @@ noremap K <NOP>
 :nmap <leader>s :source ~/.vim/vimrc<CR>
 
 " Nerd tree
-map <C-n> :NERDTreeToggle<CR>
+map <>N :NERDTreeToggle<CR>
 
-" }}}
+" fugitive
+nnoremap <leader>GB :Gblame<CR>
+nnoremap <leader>GC :Gcommit<CR>
+nnoremap <leader>GD :Gdiff<CR>
+nnoremap <leader>GE :Gedit<CR>
+nnoremap <leader>GL :Glog<CR>
+nnoremap <leader>GS :Gstatus<CR>
+nnoremap <leader>GR :Gread<CR>
+nnoremap <leader>GW :Gwrite<CR>
+
+" Autoindent the current buffer and move cursor back to where you were
+:nmap <leader>= gg=G``
+
+" Remove pasted line numbers at the beginning of a line
+:nmap <leader># :%s/^\d*\s\?//g<CR>
+
+" Multi cursor
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+s }}}
 
 " 21: command line editing {{{1
 set wildmenu
