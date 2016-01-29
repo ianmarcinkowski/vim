@@ -242,12 +242,12 @@ if has("autocmd")
 
     " remove trailing whitespace
     augroup trailing_whitespace
-        autocmd! FileType vim,css,groovy,java,javascript,less,php,scala,taskpaper,python autocmd BufWritePre <buffer> :%s/\s\+$//e
+        autocmd! FileType vim,css,groovy,java,javascript,less,php,html.twig,scala,taskpaper,python autocmd BufWritePre <buffer> :%s/\s\+$//e
     augroup END
 
     " php stuff
     augroup php
-        autocmd FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+        autocmd FileType php,html.twig setlocal cc=100,120 tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
     augroup END
 
     augroup keyword
@@ -255,7 +255,7 @@ if has("autocmd")
     augroup END
 
     augroup javascript_files
-        autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 foldmethod=indent
+        autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     augroup END
 
@@ -264,22 +264,20 @@ if has("autocmd")
     augroup END
 
     augroup html_files
-        autocmd FileType html setlocal shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=manual
-        autocmd FileType html setlocal autoindent
+        autocmd FileType html setlocal shiftwidth=2 softtabstop=2 tabstop=2
     augroup END
 
     augroup jsp_files
-        autocmd FileType jsp setlocal shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=manual autoindent
+        autocmd FileType jsp setlocal shiftwidth=2 softtabstop=2 tabstop=2
     augroup END
 
     augroup json_files
         autocmd FileType json command! Format :%!python -m json.tool<CR>
-        autocmd FileType json setlocal foldmethod=syntax
         autocmd FileType json setlocal foldnestmax=10
     augroup END
 
     augroup xml_files
-        autocmd FileType xml setlocal shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=syntax
+        autocmd FileType xml setlocal shiftwidth=2 softtabstop=2 tabstop=2
     augroup END
 
     augroup markdown_files
@@ -292,8 +290,15 @@ if has("autocmd")
 
     augroup conf_files
         autocmd! BufRead *.conf setlocal ft=conf
-        autocmd FileType conf setlocal shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=manual autoindent
+        autocmd FileType conf setlocal shiftwidth=2 softtabstop=2 tabstop=2
     augroup END
+
+    augroup fugitive_buffers
+        autocmd BufRead fugitive\:* xnoremap <buffer> dp :diffput<CR>|xnoremap <buffer> do :diffget<CR>
+        autocmd BufReadPost fugitive://* set bufhidden=delete
+        autocmd FileType gitcommit setlocal cursorline
+    augroup END
+
 endif "}}}
 " }}}
 
