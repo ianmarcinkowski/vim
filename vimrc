@@ -88,12 +88,12 @@ set cc=80,100
 set clipboard=unnamedplus
 
 if has('statusline')
-        set laststatus=2
+    set laststatus=2
 
-        " Broken down into easily includeable segments
-        set statusline=%<%f\   " Filename
-        set statusline+=\ [%{&ff}/%Y]            " filetype
-        set statusline+=%h%m%r%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+    " Broken down into easily includeable segments
+    set statusline=%<%f\   " Filename
+    set statusline+=\ [%{&ff}/%Y]            " filetype
+    set statusline+=%h%m%r%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 endif
 
 " Flake 8
@@ -299,8 +299,8 @@ let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_root_markers = ['.top', '.project', '.ctrlp']
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '.git\|.svn\|target\|node_modules\|.settings'
-    \ }
+            \ 'dir':  '.git\|.svn\|target\|node_modules\|.settings'
+            \ }
 
 let g:ctrlp_funky_syntax_highlight = 1
 if executable('ag')
@@ -316,45 +316,53 @@ endif
 
 " ctrlp_buftag
 let g:ctrlp_buftag_types = {
-    \ 'javascript'  : '--language-force=js',
-    \ 'css'         : '--language-force=css',
-    \ 'gsp'         : '--language-force=XML',
-    \ 'xml'         : '--language-force=XML',
-    \ 'spring'      : '--language-force=XML',
-    \ 'jsp'         : '--language-force=XML',
-    \ 'html'        : '--language-force=XML',
-    \ 'taskpaper'   : '--language-force=Taskpaper',
-    \ 'wsdl'        : '--language-force=wsdl',
-    \ 'markdown'    : '--language-force=markdown'
-    \ }
+            \ 'javascript'  : '--language-force=js',
+            \ 'css'         : '--language-force=css',
+            \ 'gsp'         : '--language-force=XML',
+            \ 'xml'         : '--language-force=XML',
+            \ 'spring'      : '--language-force=XML',
+            \ 'jsp'         : '--language-force=XML',
+            \ 'html'        : '--language-force=XML',
+            \ 'taskpaper'   : '--language-force=Taskpaper',
+            \ 'wsdl'        : '--language-force=wsdl',
+            \ 'markdown'    : '--language-force=markdown'
+            \ }
 
 " Lightline -> Fugitive
 function! LightLineFilename()
-  return expand('%:p:h')
+    return expand('%:p:h')
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filepath', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_function': {
-      \   'filepath': 'LightLineFilename'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
+            \ 'colorscheme': 'solarized',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'fugitive', 'readonly', 'filepath', 'filename', 'modified' ] ],
+            \   'right': [ [ 'lineinfo' ],
+            \              [ 'percent' ],
+            \              [ 'fileformat' ] ]
+            \ },
+            \ 'inactive': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'fugitive', 'readonly', 'filepath', 'filename', 'modified' ] ],
+            \   'right': [ [ 'lineinfo' ],
+            \              [ 'percent' ],
+            \              [ 'fileformat' ] ]
+            \ },
+            \ 'component': {
+            \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+            \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+            \ },
+            \ 'component_function': {
+            \   'filepath': 'LightLineFilename'
+            \ },
+            \ 'component_visible_condition': {
+            \   'readonly': '(&filetype!="help"&& &readonly)',
+            \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+            \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+            \ }
+            \ }
 
 " Nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
