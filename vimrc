@@ -43,7 +43,10 @@ Plug 'vim-scripts/paredit.vim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'evidens/vim-twig'
+Plug 'mustache/vim-mustache-handlebars'
 
+" Linting
+Plug 'wookiehangover/jshint.vim'
 
 call plug#end()
 "}}}
