@@ -19,6 +19,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-surround'
 
 " HTML autocompletion
 Plug 'mattn/emmet-vim'
@@ -201,7 +202,7 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
-s }}}
+" }}}
 
 " 21: command line editing {{{1
 set wildmenu
