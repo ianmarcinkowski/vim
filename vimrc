@@ -90,6 +90,9 @@ set bg=dark
 set ai
 set ruler
 set cc=80,100
+set nofoldenable
+set splitbelow
+set splitright
 
 " Vim clipboard to X11 clipboard
 set clipboard=unnamedplus
