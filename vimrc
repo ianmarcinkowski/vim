@@ -89,10 +89,20 @@ set sw=4
 set bg=dark
 set ai
 set ruler
-set cc=80,100
 set nofoldenable
 set splitbelow
 set splitright
+
+" Uncommon features
+if has('cc')
+    set cc=80,100
+endif
+
+" wildmenu
+if has('wildmenu')
+    set wildmode=longest,list,full
+    set wildmenu
+endif
 
 " Vim clipboard to X11 clipboard
 set clipboard=unnamedplus
