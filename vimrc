@@ -20,6 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
+Plug 'aquach/vim-http-client'
 
 " HTML autocompletion
 Plug 'mattn/emmet-vim'
@@ -94,7 +95,7 @@ set splitbelow
 set splitright
 
 " Uncommon features
-if has('cc')
+if exists(':cc')
     set cc=80,100
 endif
 
@@ -117,10 +118,12 @@ if has('statusline')
 endif
 
 " Flake 8
-autocmd BufWritePost *.py call Flake8()
-let g:flake8_max_line_length=99
-" Ignore over-indentation error
-let g:flake8_ignore="E126,F403,E712,E711"
+if exists("*Flake8")
+    autocmd BufWritePost *.py call Flake8()
+    let g:flake8_max_line_length=99
+    " Ignore over-indentation error
+    let g:flake8_ignore="E126,F403,E712,E711"
+endif
 
 " }}}
 
