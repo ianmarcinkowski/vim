@@ -48,7 +48,7 @@ Plug 'evidens/vim-twig'
 Plug 'mustache/vim-mustache-handlebars'
 
 " Linting
-Plug 'wookiehangover/jshint.vim'
+" Plug 'wookiehangover/jshint.vim'
 
 call plug#end()
 "}}}
@@ -247,11 +247,11 @@ if has("autocmd")
     autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
     au InsertLeave * match ExtraWhitespace /\s\+$/
 
-    au BufReadPost *inc set filetype=php
-    au BufReadPost *module set filetype=php
-    au BufReadPost *mako set filetype=html
-    au BufReadPost *less set filetype=less
-    au BufReadPost *py.* set filetype=python
+    au BufRead,BufNewFile *.inc,*.module set filetype=php
+    au BufRead,BufNewFile *.mako set filetype=html
+    au BufRead,BufNewFile *.less set filetype=less
+    au BufRead,BufNewFile *.py set filetype=python
+    au BufRead,BufNewFile *.hbs,*.hdbs set filetype=mustache
 
     augroup preview
         autocmd CompleteDone * pclose
