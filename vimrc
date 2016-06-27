@@ -21,6 +21,7 @@ Plug 'gregsexton/gitv'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'aquach/vim-http-client'
+Plug 'rking/ag.vim'
 
 " HTML autocompletion
 Plug 'mattn/emmet-vim'
@@ -46,6 +47,8 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'evidens/vim-twig'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'vim-scripts/java.vim'
+Plug 'vim-scripts/groovy.vim'
 
 " Linting
 " Plug 'wookiehangover/jshint.vim'
@@ -117,12 +120,24 @@ if has('statusline')
     set statusline+=%h%m%r%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 endif
 
-" Flake 8
-if exists("*Flake8")
-    autocmd BufWritePost *.py call Flake8()
-    let g:flake8_max_line_length=99
-    " Ignore over-indentation error
-    let g:flake8_ignore="E126,F403,E712,E711"
+" syntastic / Flake 8 / python linting
+let g:syntastic_python_checker_args = '--ignore=E126,F403,E712,E711'
+let g:syntastic_javascript_checkers = ['jshint']
+
+" }}}
+
+" 10: GUI {{{1
+
+if has("gui_running")
+    set t_Co=256
+    set background=dark
+    colorscheme desert
+
+    set guioptions-=T " remove tool bar
+    set guioptions-=r " remove right-hand scroll bar
+    set guioptions-=L " remove left-hand scroll bar
+    set lines=60
+    set columns=180
 endif
 
 " }}}
@@ -163,6 +178,8 @@ let g:mapleader = ","
 " window splitting
 :nmap <leader>ss :split<CR>
 :nmap <leader>sv :vsplit<CR>
+:nmap <leader>h <C-w>H
+:nmap <leader>k <C-w>K
 
 " swap windows
 :nmap <leader>w <C-w>r<CR>
@@ -271,9 +288,17 @@ if has("autocmd")
         autocmd FileType html,css,javascript setlocal iskeyword+=-
     augroup END
 
+    augroup mustache_files
+        autocmd FileType mustache setlocal shiftwidth=2 softtabstop=2 tabstop=2
+    augroup END
+
     augroup javascript_files
-        autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
+        autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2
         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    augroup END
+
+    augroup groovy_files
+        autocmd FileType groovy setlocal shiftwidth=2 softtabstop=2
     augroup END
 
     augroup vim_files
@@ -282,6 +307,10 @@ if has("autocmd")
 
     augroup html_files
         autocmd FileType html setlocal shiftwidth=2 softtabstop=2 tabstop=2
+    augroup END
+
+    augroup css_files
+        autocmd FileType css,scss setlocal shiftwidth=2 softtabstop=2 tabstop=2
     augroup END
 
     augroup jsp_files
